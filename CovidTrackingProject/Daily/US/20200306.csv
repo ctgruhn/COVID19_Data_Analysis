@@ -1,2 +1,2 @@
-{"error": true,
-"message": "Data not found. Note that state codes in URLs should be lower case, for example, /api/v1/states/ca/info.json instead of /api/v1/states/CA/info.json."}
+date,states,positive,negative,pending,hospitalizedCurrently,hospitalizedCumulative,inIcuCurrently,inIcuCumulative,onVentilatorCurrently,onVentilatorCumulative,recovered,dateChecked,death,hospitalized,lastModified,total,totalTestResults,posNeg,deathIncrease,hospitalizedIncrease,negativeIncrease,positiveIncrease,totalTestResultsIncrease,hash
+20200306,36,1051,2289,458,,6,,,,,,2020-03-06T00:00:00Z,26,6,2020-03-06T00:00:00Z,3798,3340,3340,6,1,645,141,786,bff341983cc3d91067e76e695a7b20466039800f
