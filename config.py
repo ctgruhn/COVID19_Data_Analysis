@@ -1,4 +1,5 @@
 import datetime
+import os
 
 # CONSTANTS
 BASE_URL = "https://covidtracking.com/api/v1/"
@@ -23,5 +24,11 @@ FILE_LOCATION = {
 RACE_FILES = {"combined": "states-combined", "separate": "states-separate"}
 FILE_TYPE = "csv"
 
-START_DATE = datetime.date(2020, 1, 22)
+# Find newest file to determine appropriate START_DATE
+path = "CovidTrackingProject/Daily/US/"
+files = os.listdir(path)
+newest_file = os.path.splitext(max(files))
+last_update = datetime.datetime.strptime(newest_file[0], '%Y%m%d')
+
+START_DATE = last_update.date() + datetime.timedelta(1)
 END_DATE = datetime.date.today()

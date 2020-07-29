@@ -14,7 +14,7 @@ def getDailyHistoricData(API_URL, file_type, file_location, start_date, end_date
         fullFilePath = "{}{}.{}".format(file_location, single_date.strftime("%Y%m%d"), file_type)
         if myfile.status_code == 200:           # Skips requesting API URLs that do not exist
             if os.path.isfile(fullFilePath):    # Skips redownloading files
-                print ("{} File exists".format(fullFilePath))
+                print ("{} File Already Exists".format(fullFilePath))
             else:
                 open("{}{}.{}".format(file_location, single_date.strftime("%Y%m%d"), file_type), 'wb').write(myfile.content)
                 print("SUCCESSFULLY DOWNLOADED {}{}.{}".format(file_location, single_date.strftime("%Y%m%d"), file_type))
@@ -22,10 +22,11 @@ def getDailyHistoricData(API_URL, file_type, file_location, start_date, end_date
             print("{} does not exist".format(fileURL))
 
 def getAPIData(Base_URL, file_name, file_type, file_location):
-    myfile = requests.get("{}/{}.{}".format(Base_URL, file_name, file_type))
+    myfile = requests.get("{}{}.{}".format(Base_URL, file_name, file_type))
+    fullFilePath = "{}{}.{}".format(file_location, file_name, file_type)
     if myfile.status_code == 200:
-        open("{}/{}.{}".format(file_location, file_name, file_type), "wb").write(myfile.content)
-        print("{}/{}.{}".format(file_location, file_name, file_type))
+        open("{}{}.{}".format(file_location, file_name, file_type), "wb").write(myfile.content)
+        print("SUCCESSFULLY DOWNLOADED {}{}.{}".format(file_location, file_name, file_type))
     else:
         print ("{} does not exist".format(Base_URL))
 
