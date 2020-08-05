@@ -24,6 +24,8 @@ FILE_LOCATION = {
 RACE_FILES = {"combined": "states-combined", "separate": "states-separate"}
 FILE_TYPE = "csv"
 
+SUMMARY_FILE_PATH = "{}summary.{}".format(BASE_FILE_LOCATION, FILE_TYPE)
+
 # Find newest file to determine appropriate START_DATE
 path = "CovidTrackingProject/Daily/US/"
 files = os.listdir(path)
