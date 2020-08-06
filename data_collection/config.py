@@ -14,7 +14,7 @@ STATES = ["ak", "al", "ar", "as", "az", "ca", "co", "ct", "dc", "de", "fl", "ga"
           "ms", "mt", "nc", "nd", "ne", "nh", "nj", "nm", "nv", "ny", "oh", "ok", "or", "pa", 
           "pr", "ri", "sc", "sd", "tn", "tx", "ut", "va", "vi", "vt", "wa", "wi", "wv", "wy"]
 
-BASE_FILE_LOCATION = "CovidTrackingProject/"
+BASE_FILE_LOCATION = "Data/CovidTrackingProject/"
 FILE_LOCATION = {
     "statesDaily": "{}Daily/State/".format(BASE_FILE_LOCATION),
     "usDaily": "{}Daily/US/".format(BASE_FILE_LOCATION),
@@ -28,14 +28,14 @@ SUMMARY_FILE_PATH = "{}summary.{}".format(BASE_FILE_LOCATION, FILE_TYPE)
 
 # Find newest file to determine appropriate START_DATE
 def getStartDate():
-    path = FILE_LOCATION["statesDaily"]
+    path = FILE_LOCATION["usDaily"]
     files = os.listdir(path)
     newest_file = os.path.splitext(max(files))
     last_update = datetime.datetime.strptime(newest_file[0], '%Y%m%d')
     return last_update.date() + datetime.timedelta(1)
 
-# START_DATE = getStartDate()
+START_DATE = getStartDate()
 END_DATE = datetime.date.today()
 
 #Manual Start/End Dates (For Testing Purposes)
-START_DATE = datetime.date(2020, 8, 4)
+# START_DATE = datetime.date(2020, 8, 4)
