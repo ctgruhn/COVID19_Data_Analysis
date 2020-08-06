@@ -32,14 +32,17 @@ def getAPIData(Base_URL, file_name, file_type, file_location):
 
 
 # Request all US daily files
-getDailyHistoricData(API_URL["usDaily"], FILE_TYPE, FILE_LOCATION["usDaily"], START_DATE, END_DATE)
+def getUSDaily(start_date = START_DATE, end_date = END_DATE):
+    getDailyHistoricData(API_URL["usDaily"], FILE_TYPE, FILE_LOCATION["usDaily"], start_date, end_date)
 
 # Cycle through all states
-for state in STATES:
-    URL = "{}{}/".format(API_URL["statesDaily"], state)
-    file_path = "{}{}/".format(FILE_LOCATION["statesDaily"], state)
-    getDailyHistoricData(URL, FILE_TYPE, file_path, START_DATE, END_DATE)
+def getStateDaily(start_date = START_DATE, end_date = END_DATE):
+    for state in STATES:
+        URL = "{}{}/".format(API_URL["statesDaily"], state)
+        file_path = "{}{}/".format(FILE_LOCATION["statesDaily"], state)
+        getDailyHistoricData(URL, FILE_TYPE, file_path, start_date, end_date)
 
 # Download singular race files
-getAPIData(API_URL["raceSeparate"],RACE_FILES["separate"],FILE_TYPE, FILE_LOCATION["raceSeparate"] )
-getAPIData(API_URL["raceCombined"],RACE_FILES["combined"],FILE_TYPE, FILE_LOCATION["raceCombined"] )
+def getRaceData():
+    getAPIData(API_URL["raceSeparate"],RACE_FILES["separate"],FILE_TYPE, FILE_LOCATION["raceSeparate"] )
+    getAPIData(API_URL["raceCombined"],RACE_FILES["combined"],FILE_TYPE, FILE_LOCATION["raceCombined"] )

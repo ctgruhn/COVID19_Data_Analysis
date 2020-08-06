@@ -19,7 +19,7 @@ def setSummary(file_type, file_location, target_file=SUMMARY_FILE_PATH, start_da
             print("{} SUCCESSFULLY ADDED TO SUMMARY".format(fullFilePath))
         else:
             print("{} DOES NOT EXIST".format(fullFilePath))
-
-for state in STATES:
-    file_path = "{}{}/".format(FILE_LOCATION["statesDaily"], state)
-    setSummary(FILE_TYPE,file_path)
+def consolodate(start_date=START_DATE, end_date=END_DATE):
+    for state in STATES:
+        file_path = "{}{}/".format(FILE_LOCATION["statesDaily"], state)
+        setSummary(FILE_TYPE,file_path)
