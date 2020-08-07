@@ -6,7 +6,6 @@ def dateRange(start_date, end_date):
         yield start_date + datetime.timedelta(n)
 
 def setSummary(file_type, file_location, target_file=SUMMARY_FILE_PATH, start_date = START_DATE, end_date = END_DATE):
-    input_file = csv.DictReader(open("CovidTrackingProject/Daily/state/ak/20200306.csv"))
     for single_date in dateRange(start_date, end_date):
         fullFilePath = "{}{}.{}".format(file_location, single_date.strftime("%Y%m%d"), file_type)
         if os.path.isfile(fullFilePath):    # Skips redownloading files
