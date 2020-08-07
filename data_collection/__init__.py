@@ -4,7 +4,7 @@ from consolodate import *
 
 if __name__ == "__main__":
     start = START_DATE
-    if (start != END_DATE):
+    if (start < END_DATE):
         getUSDaily(start)
         getStateDaily(start)
         getRaceData()
