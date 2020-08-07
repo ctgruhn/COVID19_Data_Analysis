@@ -1,6 +1,14 @@
 import datetime
 import os
 
+# Find newest file to determine appropriate START_DATE
+def getStartDate():
+    path = FILE_LOCATION["usDaily"]
+    files = os.listdir(path)
+    newest_file = os.path.splitext(max(files))
+    last_update = datetime.datetime.strptime(newest_file[0], '%Y%m%d')
+    return last_update.date() + datetime.timedelta(1)
+
 """CONSTANTS"""
 BASE_URL = "https://covidtracking.com/api/v1/"
 API_URL = {
@@ -25,14 +33,6 @@ RACE_FILES = {"combined": "states-combined", "separate": "states-separate"}
 FILE_TYPE = "csv"
 
 SUMMARY_FILE_PATH = "{}summary.{}".format(BASE_FILE_LOCATION, FILE_TYPE)
-
-# Find newest file to determine appropriate START_DATE
-def getStartDate():
-    path = FILE_LOCATION["usDaily"]
-    files = os.listdir(path)
-    newest_file = os.path.splitext(max(files))
-    last_update = datetime.datetime.strptime(newest_file[0], '%Y%m%d')
-    return last_update.date() + datetime.timedelta(1)
 
 START_DATE = getStartDate()
 END_DATE = datetime.date.today()
