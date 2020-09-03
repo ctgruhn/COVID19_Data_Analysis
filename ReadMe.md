@@ -27,4 +27,4 @@ The chart is displayed using D3.js.
 
 ## Acknowledgments
 To learn more about D3.js and parallel coordinates graphs click [here](https://observablehq.com/@d3/parallel-coordinates).
-This project utilizes the above example as well as Kai Chang's [example] (http://bl.ocks.org/syntagmatic/3150059) .
+This project utilizes the above example as well as Kai Chang's [example](http://bl.ocks.org/syntagmatic/3150059).
