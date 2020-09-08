@@ -1,5 +1,5 @@
 import csv, os.path, datetime
-from config import SUMMARY_FILE_PATH, FILE_TYPE, FILE_LOCATION, STATES, START_DATE, END_DATE
+from data_collection.config import SUMMARY_FILE_PATH, FILE_TYPE, FILE_LOCATION, STATES, START_DATE, END_DATE
 
 def dateRange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):

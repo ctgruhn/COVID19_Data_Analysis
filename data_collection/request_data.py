@@ -1,5 +1,5 @@
 import csv, os.path, requests, datetime
-from config import *
+from data_collection.config import *
 
 def dateRange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
