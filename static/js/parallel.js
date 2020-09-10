@@ -28,7 +28,7 @@ var colors = {
     "AK": [185,56,73], 
     "AL": [37,50,75],
     "AR": [325,50,39],
-    // "AS": [10,28,67],
+    "AS": [10,28,67],
     "AZ": [271,39,57],
     "CA": [56,58,73],
     "CO": [28,100,52],
@@ -37,7 +37,7 @@ var colors = {
     "DE": [30,100,73],
     "FL": [318,65,67],
     "GA": [274,30,76],
-    // "GU": [20,49,49],
+    "GU": [20,49,49],
     "HI": [334,80,84],
     "IA": [185,80,45],
     "ID": [10,30,42],
@@ -67,7 +67,7 @@ var colors = {
     "OK": [0,229,255],
     "OR": [0,255,183],
     "PA": [0,89,255], 
-    // "PR": [53,152,222],
+    "PR": [53,152,222],
     "RI": [274,30,76],
     "SC": [214,55,79],
     "SD": [271,39,57],
@@ -75,7 +75,7 @@ var colors = {
     "TX": [0,178,255],
     "UT": [28,100,52],
     "VA": [120,56,40],
-    // "VI": [120,56,40],
+    "VI": [120,56,40],
     "VT": [120,56,40],
     "WA": [120,56,40],
     "WI": [120,56,40],
@@ -251,13 +251,80 @@ function grayscale(pixels, args) {
   }
   return pixels;
 };
- 
+
+function create_legend(colors,brush) {
+  // create legend
+  var legend_data = d3.select("#legend")
+    .html("")
+    .selectAll(".row")
+    .data( _.keys(colors).sort() )
+
+  // filter by group
+  var legend = legend_data
+    .enter().append("div")
+      .attr("title", "Hide group")
+      .on("click", function(d) { 
+        // toggle food group
+        if (_.contains(excluded_groups, d)) {
+          d3.select(this).attr("title", "Hide group")
+          excluded_groups = _.difference(excluded_groups,[d]);
+          brush();
+        } else {
+          d3.select(this).attr("title", "Show group")
+          excluded_groups.push(d);
+          brush();
+        }
+      });
+
+      legend
+      .append("span")
+      .style("background", function(d,i) { return color(d,0.85)})
+      .attr("class", "color-bar");
+  
+    legend
+      .append("span")
+      .attr("class", "tally")
+      .text(function(d,i) { return 0});  
+  
+    legend
+      .append("span")
+      .text(function(d,i) { return " " + d});  
+  
+    return legend;
+  }
+
 // render polylines i to i+render_speed 
 function render_range(selection, i, max, opacity) {
   selection.slice(i,max).forEach(function(d) {
     path(d, foreground, color(d.state,opacity));
   });
 };
+
+// simple data table
+function data_table(sample) {
+  // sort by first column
+  var sample = sample.sort(function(a,b) {
+    var col = d3.keys(a)[0];
+    return a[col] < b[col] ? -1 : 1;
+  });
+
+  var table = d3.select("#food-list")
+    .html("")
+    .selectAll(".row")
+      .data(sample)
+    .enter().append("div")
+      .on("mouseover", highlight)
+      .on("mouseout", unhighlight);
+
+  table
+    .append("span")
+      .attr("class", "color-block")
+      .style("background", function(d) { return color(d.group,0.85) })
+
+  table
+    .append("span")
+      .text(function(d) { return d.name; })
+}
 
 // Adjusts rendering speed 
 function optimize(timer) {
@@ -402,6 +469,13 @@ function brush() {
       }) ? selected.push(d) : null;
     });
 
+      // free text search
+  // var query = d3.select("#search")[0][0].value;
+  // if (query.length > 0) {
+  //   selected = search(selected, query);
+  // }
+
+  
   if (selected.length < data.length && selected.length > 0) {
     d3.select("#include-data").attr("disabled", null);
     d3.select("#exclude-data").attr("disabled", null);
@@ -410,8 +484,12 @@ function brush() {
     d3.select("#exclude-data").attr("disabled", "disabled");
   };
 
+  // total by state
+  var tallies = _(selected)
+  .groupBy(function(d) { return d.state; })
+
   // include empty groups
-  // _(colors).each(function(v,k) { tallies[k] = tallies[k] || []; });
+  _(colors).each(function(v,k) { tallies[k] = tallies[k] || []; });
 
   legend
     .style("text-decoration", function(d) { return _.contains(excluded_groups,d) ? "line-through" : null; })
