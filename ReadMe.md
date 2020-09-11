@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ## Flaws
 
-Ultimately, any data visualization is only as good as the data it analyzes. While the [COVID Tracking Project] (https://covidtracking.com) is a great resource, it relies on the state governments that are meant to collect this data, which can be lacking. This is unfortunately why some data points rapidly fall to 0.
+Ultimately, any data visualization is only as good as the data it analyzes. While the [COVID Tracking Project](https://covidtracking.com) is a great resource, it relies on the state governments that are meant to collect this data, which can be lacking. This is unfortunately why some data points rapidly fall to 0.
 
 ## Next Steps
 
