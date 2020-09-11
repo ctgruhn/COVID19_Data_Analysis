@@ -1,5 +1,5 @@
 # import requests
-from COVID19_Chart.config import BASE_URL, API_URL, STATES, START_DATE, END_DATE, FILE_LOCATION, FILE_TYPE, RACE_FILES
+from COVID19_Chart.config import BASE_URL, API_URL, STATES, LATEST_UPDATE, TODAY, FILE_LOCATION, FILE_TYPE, RACE_FILES
 # import datetime
 
 
@@ -34,15 +34,15 @@ def getAPIData(Base_URL, file_name, file_type, file_location):
 
 
 # Request all US daily files
-def getUSDaily(start_date = START_DATE, end_date = END_DATE):
+def getUSDaily(start_date = LATEST_UPDATE, end_date = TODAY):
     getDailyHistoricData(API_URL["usDaily"], FILE_TYPE, FILE_LOCATION["usDaily"], start_date, end_date)
 
 # Cycle through all states
-def getStateDaily(start_date = START_DATE, end_date = END_DATE):
+def getStateDaily(start_date = LATEST_UPDATE, end_date = TODAY):
     for state in STATES:
         URL = "{}{}/".format(API_URL["statesDaily"], state)
         file_path = "{}{}/".format(FILE_LOCATION["statesDaily"], state)
-        # getDailyHistoricData(URL, FILE_TYPE, file_path, start_date, end_date)
+        getDailyHistoricData(URL, FILE_TYPE, file_path, start_date, end_date)
         getAPIData(URL,"daily","json",file_path)
 
 # Download singular race files

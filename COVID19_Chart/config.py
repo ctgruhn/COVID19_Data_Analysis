@@ -34,8 +34,9 @@ FILE_TYPE = "csv"
 
 SUMMARY_FILE_PATH = "{}summary.{}".format(BASE_FILE_LOCATION, FILE_TYPE)
 
-START_DATE = getStartDate()
-END_DATE = datetime.date.today()
+INITIAL_DATE = '20200306'
+LATEST_UPDATE = datetime.date.strftime(getStartDate(),'%Y%m%d')
+TODAY = datetime.date.today()
 
 #Manual Start/End Dates (For Testing Purposes)
 # START_DATE = datetime.date(2020, 8, 4)
