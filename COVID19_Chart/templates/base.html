@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+  <head>    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,38 +10,53 @@
     <meta name="author" content="Carl Gruhn">
     <title>US COVID Data</title>
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  </head>
   </head>
   <body class=dark>
-    {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+  <!-- Flashes for testing purposes
+  Can be modified or removed. Does nothing if no flashes -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
 {% endwith %}
-    <div id="header">
-      <h1>COVID Data By State</h1>
-      <!-- TODO: <button title="Reset excluded data" id="reset-data" disabled="disabled">Reset</button> -->
-      <button title="Zoom in on selected data" id="include-data" disabled="disabled">Include</button>
-      <button title="Remove selected data" id="exclude-data" disabled="disabled">Exclude</button>
-      <button title="Export data as CSV" id="export-data">Export</button>
-      <div class="controls">
-        <strong id="rendered-count"></strong>/<strong id="selected-count"></strong>
-        <strong>States</strong> (Plus DC)
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-    {% block content %}{% endblock %}
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mb-0 h1" href="{{ url_for('index') }}">COVID Visualization</a>
+        <div class="navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('schema') }}">Schema</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+      <!-- Chart header. Useful if additional charts are added -->
+      {% block header %}
+      {% endblock header %}
+
+    {% block content %}
+    {% endblock content %}
+
     <script src="http://d3js.org/d3.v2.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
     <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <script src="http://d3js.org/d3.v2.js"></script>
+    <script src="http://underscorejs.org/underscore.js"></script>
     <script>
         //var updateDataURL = "{{ url_for('updateData') }}";
     </script>
-    <script src="{{ url_for('static', filename='js/parallel.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- JavaScript for specific chart -->
+    {% block chartjs %}
+    {% endblock chartjs %}
+
   </body>
 </html>

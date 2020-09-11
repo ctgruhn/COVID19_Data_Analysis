@@ -1,4 +1,21 @@
 {% extends "base.html" %}
+{% block header %}
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
+  <div id="header">
+
+      <!-- TODO: <button title="Reset excluded data" id="reset-data" disabled="disabled">Reset</button> -->
+      <button title="Zoom in on selected data" id="include-data" class="btn btn-secondary btn-sm" disabled="disabled">Include</button>
+      <button title="Remove selected data" id="exclude-data" class="btn btn-secondary btn-sm" disabled="disabled">Exclude</button>
+      <button title="Export data as CSV" id="export-data" class="btn btn-secondary btn-sm">Export</button>
+      <div class="controls">
+        <strong id="rendered-count"></strong>/<strong id="selected-count"></strong>
+        <strong>States</strong> (Plus DC)
+      </div>
+      <!-- <div style="clear:both;"></div> -->
+    </div>
+{% endblock header %}
+
+
 {% block content %}
 
     <div id="chart">
@@ -11,4 +28,10 @@
 
 
 {% endblock content %}
+
+
+{% block chartjs %}
+<script src="{{ url_for('static', filename='js/parallel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock chartjs %}
 
