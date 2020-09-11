@@ -12,7 +12,7 @@ html, body {
     color: #404040;
   }
   body.dark {
-    background: #131313;
+    background: #343a40;
     color: #e3e3e3;
   }
   a {
@@ -136,7 +136,7 @@ html, body {
   button#exclude-data:hover {
     color: #900;
   }
-  #food-list {
+  #state-list {
     width: 100%;
     height: 460px;
     overflow-x: auto;
@@ -200,11 +200,23 @@ html, body {
     padding: 6px 24px 4px;
     line-height: 24px;
   }
-  .dark #header {
-    background: #040404;
+  .navbar {
+    padding: 0px;
+  }
+  .dark #header{
+    background: #343a40;
+    /* background: #040404; */
+    color: #f3f3f3;
+  }
+  navbar .navbar-dark .bg-dark{
+    background-color: #040404;
     color: #f3f3f3;
   }
   #header h1 {
+    display: inline-block;
+    margin: 0px 14px 0 0;
+  }
+  #header h6 {
     display: inline-block;
     margin: 0px 14px 0 0;
   }
