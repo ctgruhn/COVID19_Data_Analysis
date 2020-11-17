@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[1]:
-from COVID19_Chart.config import INITIAL_DATE, LATEST_UPDATE
+from DataCollection.config import INITIAL_DATE, LATEST_UPDATE
 import pandas as pd
 import glob
 

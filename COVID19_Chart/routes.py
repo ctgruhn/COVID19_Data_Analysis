@@ -1,10 +1,11 @@
 from COVID19_Chart import app
-from flask import Flask, jsonify, request, render_template, flash
+from flask import jsonify, request, render_template, flash
 # from COVID19_Chart.request_data import initData
 # from COVID19_Chart.analytics import update_chart#, initData
 from COVID19_Chart.analytics import update_chart
 from COVID19_Chart.tables import table
-from COVID19_Chart.config import LATEST_UPDATE
+from DataCollection.config import LATEST_UPDATE
+# import datetime
 
 @app.route('/')
 def index():
@@ -21,7 +22,7 @@ def index():
 # all_data = initData() # Would be imporved by using database instead of files
 min_date = "2020-03-16"
 max_date = "2020-08-16"
-max_date = (LATEST_UPDATE  - datetime.timedelta(1)).strftime("%Y-%m-%d")
+# max_date = (LATEST_UPDATE  - datetime.timedelta(1)).strftime("%Y-%m-%d")
 
 @app.route('/schema')
 def schema():
